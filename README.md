@@ -1,1 +1,6 @@
-<img width="1634" height="1440" alt="image" src="https://github.com/user-attachments/assets/b1538a6f-734c-49d9-93bf-8906fcfbd72f" />
+This is a repo for all assets related to tryhackme courses.
+
+## Paths
+### JR Penetration Tester
+ - [Privilege Escalation - Linux](privilege-escalation/linux/README.md) - completed
+ - [Introduction to Web Hacking](introduction-to-web-hacking/README.md) - WIP

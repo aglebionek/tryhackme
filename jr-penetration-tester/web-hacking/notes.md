@@ -1,4 +1,6 @@
+## Path Discovery
 1. Check /robots.txt for disallowed paths
+
 2. Identify used technologies and frameworks
     - favicon hash:
     ```sh
@@ -9,4 +11,68 @@
     ```sh
     curl -I https://URL
     ```
+    - [Wappalyzer browser extension](https://www.wappalyzer.com/)
+
 3. Check sitemap.xml for structure
+
+4. Google dorking
+    - site:URL - returns results only from the specified website address
+    - inurl:admin - returns results that have the specified word in the URL
+    - intitle:admin - returns results which are a particular file extension
+    - filetype:pdf - returns results that contain the specified word in the title
+
+5. Other analysis tools
+    - Search for websites/company's github repositories
+    - Look for old versions of the website on [Wayback Machine](https://archive.org/web/)
+    - Try looking for company's s3 buckets,  http(s)://{name}.s3.amazonaws.com, using names like company name, product names, etc.
+
+6. Use automated discovery tools
+    - Gobuser
+    ```sh
+    gobuster dir -u https://URL -w /path/to/wordlist
+    ```
+    - Ffuf
+    ```sh
+    ffuf -u https://URL/FUZZ -w /path/to/wordlist
+    ```
+    - Dirb
+    ```sh
+    dirb https://URL /path/to/wordlist
+    ```
+
+## Subdomain Enumeration
+1. Check certificates for subdomains
+    - [crt.sh](https://crt.sh/)
+
+2. Use google search with filter "site:*.domain.com -site:www.domain.com"
+
+3. DNS bruteforce
+    - dnsrecon
+    ```sh
+    dnsrecon -t brt -d domain.com
+    ```
+
+    - sublist3r
+    ```sh
+    sublist3r -d domain.com
+    ```
+
+    - ffuf with Host header
+    ```sh
+    ffuf -u https://domain.com -H "Host: FUZZ.domain.com" -w /path/to/wordlist -fs {size}
+    ```
+    The above command uses the -w switch to specify the wordlist we are going to use. The -H switch adds/edits a header (in this instance, the Host header), we have the FUZZ keyword in the space where a subdomain would normally go, and this is where we will try all the options from the wordlist. The -fs switch is used to filter out responses of a certain size, which is useful for ignoring non-existent subdomains that return a standard 404 page.
+
+## Credentials Enumeration
+1. Bruteforce usernames
+    - ffuf with common usernames wordlist
+    ```sh
+    ffuf -u https://URL/login -X POST -d "username=FUZZ&password=x" -w /path/to/usernames_wordlist -H "Content-Type: application/x-www-form-urlencoded" -fc xyz -mr "already exists"
+    ```
+    In the above command, we are sending a POST request to the login page with a username parameter set to FUZZ (which will be replaced by each entry in the usernames wordlist) and a password parameter set to anypassword. The -H switch is used to set the Content-Type header to application/x-www-form-urlencoded. Might also be something like application/json (check in the network tab). The -fc switch filters out responses with a xyz status code (e.g., 500) (also check in the network tab). The -mr switch matches responses that contain the string "already exists", which indicates that the username is valid.
+
+2. Using the previously bruteforced usernames, bruteforce passwords
+    - ffuf with common passwords wordlist
+    ```sh
+    ffuf -u https://URL/login -X POST -w usernames.txt:user,passwords.txt:pswd -d "username=user&password=pswd" -H "Content-Type: application/x-www-form-urlencoded" -fc xyz -mr "Welcome"
+    ```

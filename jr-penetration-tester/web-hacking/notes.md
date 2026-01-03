@@ -76,3 +76,14 @@
     ```sh
     ffuf -u https://URL/login -X POST -w usernames.txt:user,passwords.txt:pswd -d "username=user&password=pswd" -H "Content-Type: application/x-www-form-urlencoded" -fc xyz -mr "Welcome"
     ```
+
+## Auth Bypass
+1. POST request logic flaws
+    - Check for parameters that can be manipulated to bypass authentication, e.g., changing "isAdmin=false" to "isAdmin=true"
+    - Check if you can't provide your own data like an email address to reset the password of another user
+
+2. Cookie tampering
+    - Check for cookies that can be manipulated to bypass authentication, e.g., changing "role=user" to "role=admin"
+    ```sh
+    curl -H "Cookie: logged_in=true; admin=true" https://domain.com
+    ```

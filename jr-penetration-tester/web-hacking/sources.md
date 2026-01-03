@@ -1,1 +1,2 @@
-https://github.com/danielmiessler/SecLists
+https://github.com/danielmiessler/SecLists - a collection of multiple types of wordlists for different purposes.
+https://crackstation.net - a large database of pre-computed password hashes for cracking purposes.

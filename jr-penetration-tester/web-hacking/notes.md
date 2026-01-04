@@ -87,3 +87,27 @@
     ```sh
     curl -H "Cookie: logged_in=true; admin=true" https://domain.com
     ```
+
+### IDOR - Insecure Direct Object Reference
+A situation where an application provides direct access to objects based on user-supplied input. An attacker can manipulate this input to access unauthorized data.
+1. Look for parameters that reference user IDs or object IDs in the URL or request body
+    - Example: https://domain.com/user/profile?id=12345
+
+2. Try changing the ID to see if you can access other users' data
+    - Example: https://domain.com/user/profile?id=12346
+
+3. Identify ids in POST/PUT/PATCH requests as well and try to replace them
+
+4. Look for encoded data that might contain IDs, and try decoding/replacing them
+    - Base64 encoded JSON objects
+    - JWT tokens
+    - Hashes (https://crackstation.net/)
+
+5. If the ids are unpredictable, you might want to manually create 2 different accounts and try using their respective ids to see if you can access each other's data
+
+6. Sometimes, despite the ids not being used somewhere in the request, they might still be vulnerable to IDOR. For example, fetching user details might use a session cookie, but using directly in request parameters might be vulnerable.
+    - Example:
+        - GET /user/profile (uses session cookie to fetch user details)
+        - GET /user/profile?id=12345 (uses id parameter to update user details)
+        - POST /user/profile -d "{id: 12345}"
+

@@ -88,7 +88,7 @@
     curl -H "Cookie: logged_in=true; admin=true" https://domain.com
     ```
 
-### IDOR - Insecure Direct Object Reference
+## IDOR - Insecure Direct Object Reference
 A situation where an application provides direct access to objects based on user-supplied input. An attacker can manipulate this input to access unauthorized data.
 1. Look for parameters that reference user IDs or object IDs in the URL or request body
     - Example: https://domain.com/user/profile?id=12345
@@ -111,3 +111,14 @@ A situation where an application provides direct access to objects based on user
         - GET /user/profile?id=12345 (uses id parameter to update user details)
         - POST /user/profile -d "{id: 12345}"
 
+## File Inclusion
+1. Look for parameters that reference file paths in the URL or request body
+    - Example: https://domain.com/view?file=report.pdf
+
+2. Directory Traversal
+    - Try using ../ to traverse directories and access sensitive files
+    - Example: https://domain.com/view?file=../../../../etc/passwd
+
+3. Null Byte Injection
+    - Try appending a null byte (%00) to the file name to bypass file extension checks
+    - Example: https://domain.com/view?file=report.pdf%00.jpg

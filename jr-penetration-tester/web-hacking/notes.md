@@ -125,3 +125,28 @@ A situation where an application provides direct access to objects based on user
 
 4. Look for different methods for the same request, that might act differently
     - Example: GET /view?file=report.pdf vs POST /view -d "file=report.pdf"
+
+## Server-Side Request Forgery (SSRF)
+### What is an SSRF?
+
+SSRF stands for Server-Side Request Forgery. It's a vulnerability that allows a malicious user to cause the webserver to make an additional or edited HTTP request to the resource of the attacker's choosing.
+
+### Types of SSRF
+
+There are two types of SSRF vulnerability; the first is a regular SSRF where data is returned to the attacker's screen. The second is a Blind SSRF vulnerability where an SSRF occurs, but no information is returned to the attacker's screen.
+
+### What's the impact?
+A successful SSRF attack can result in any of the following: 
+- Access to unauthorised areas.
+- Access to customer/organisational data.
+- Ability to Scale to internal networks.
+- Reveal authentication tokens/credentials.
+
+### Example
+![diagram](image.png)
+
+Directory Traversal can also apply, as well as other techniques like:
+- &x=& to prevent other parameters from being processed
+- Checking the headers for sensitive information like cookie structure, auth tokens, secrets, etc.
+
+![potential vulnerabilities](image-1.png)

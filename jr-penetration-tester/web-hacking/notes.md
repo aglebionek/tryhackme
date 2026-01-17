@@ -192,3 +192,16 @@ Examples:
 - Comments on a blog
 - User profile information
 - Website Listings
+
+### DOM-Based XSS
+DOM-Based XSS occurs when the vulnerability exists in the client-side code rather than the server-side. In this case, the malicious script is executed as a result of modifying the DOM (Document Object Model) in the victim's browser.
+
+Look for parts of the code that access certain variables that an attacker can have control over, such as "window.location.x" parameters, "document.referrer", "document.cookie", etc.
+
+Eval functions are also a common source of DOM-based XSS vulnerabilities.
+
+### Blind XSS
+Blind XSS is a type of stored XSS where the attacker does not see the immediate result of their payload. Instead, the payload is stored on the server and executed when an administrator or another user accesses the affected page.
+
+https://github.com/mandatoryprogrammer/xsshunter-express - a tool for detecting and exploiting XSS vulnerabilities.
+

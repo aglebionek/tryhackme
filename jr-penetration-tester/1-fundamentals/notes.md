@@ -3,19 +3,19 @@
 
 ## Hattypes
 
-<img src="../images/hattypes.png" alt="Hattypes" style="width: 500px;" />
+<img src="./images/hattypes.png" alt="Hattypes" style="width: 1000px;" />
 
 
 ## Rules of Engagement (RoE)
 
 The ROE is a document that is created at the initial stages of a penetration testing engagement.
 
-<img src="../images/roe.png" alt="Rules of Engagement" style="width: 500px;" />
+<img src="./images/roe.png" alt="Rules of Engagement" style="width: 1000px;" />
 
 
 ## Stages
 
-<img src="../images/stages.png" alt="Rules of Engagement" style="width: 500px;" />
+<img src="./images/stages.png" alt="Rules of Engagement" style="width: 1000px;" />
 
 
 ## Methodologies - TODO
@@ -23,7 +23,7 @@ https://github.com/mtesauro/owasp-wte
 
 ## Whitebox, Greybox, Blackbox
 
-<img src="../images/boxes.png" alt="Rules of Engagement" style="width: 500px;" />
+<img src="./images/boxes.png" alt="Rules of Engagement" style="width: 1000px;" />
 
 - **Blackbox**: No prior knowledge of the target system. The tester approaches the system as an external attacker would, relying on publicly available information and reconnaissance techniques to identify vulnerabilities.
 
@@ -62,3 +62,31 @@ The management of the privileges a system's access role has.
 
 Example: The role ROLE_FINANCE has to have acces to financial records. We have to manage what level of access this role has. Does it have read-only access, or read and write access? This is where PAM comes into play. The ROLE_HR role has to be set to have none of these privileges of accessing financial records.
 
+
+
+
+# Security Models
+
+## Bell-LaPadula Model
+
+<img src="./images/bell-lapadula.png" alt="Bell-LaPadula Model" style="width: 1000px;" />
+
+
+## Biba Model
+
+<img src="./images/biba.png" alt="Biba Model" style="width: 1000px;" />
+
+
+
+
+# Threat Modeling and Incident Response
+
+## Threat Modeling
+
+### STRIDE
+
+<img src="./images/stride.png" alt="STRIDE" style="width: 1000px;" />
+
+### Incident Response
+
+<img src="./images/incident-response.png" alt="Incident Response" style="width: 1000px;" />
